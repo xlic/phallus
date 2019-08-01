@@ -124,6 +124,8 @@ function show_top(chan, action) {
 		function(err, rows) {
 			if (err)
 				console.log(err);
+			if (!rows)
+				client.say(chan, '*crickets*');
 			var name;
 			if (action == 'succ')
 				name = 'suckers';
@@ -148,9 +150,12 @@ function show_dicks(nick, chan) {
 		function(err, row) {
 			if (err)
 				console.log(err);
-			client.say(chan, nick + ', you\'ve sucked ' + row.succ +
-				' dicks and cut ' + row.cutt + ' dicks with an average of ' +
-				row.average + ' seconds per dick in ' + chan + '.');
+			if (row)
+				client.say(chan, nick + ', you\'ve sucked ' + row.succ +
+					' dicks and cut ' + row.cutt + ' dicks with an average of ' +
+					row.average + ' seconds per dick in ' + chan + '.');
+			else
+				client.say(chan, nick + ', you haven\'t participated in the dickhunt.');
 		});
 }
 
