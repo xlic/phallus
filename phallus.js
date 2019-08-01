@@ -86,7 +86,7 @@ function handle_action(nick, chan, action) {
 					' = ' + action + ' + 1 WHERE nick = ? AND chan = ?', nick, chan);
 			else
 				db.run('INSERT INTO hunters VALUES (?, ?, ?, ?)',
-					nick, chan, 0 + (action == 'succ'), 0 + (action == 'cutt'));
+					nick, chan, action == 'succ', action == 'cutt');
 			db.run('INSERT INTO hunter_times VALUES (?, ?, ?)', nick, chan, time);
 			db.get('SELECT succ, cutt FROM hunters WHERE nick = ? AND chan = ?', nick, chan,
 			function(err, row) {
