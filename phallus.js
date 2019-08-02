@@ -261,7 +261,8 @@ function sender_ready(state) {
 	if (x < xmin || t < tmin) {
 		return false;
 	} else {
-		return t > sender_func(x, xmin, xmax, tmin, tmax);
+		let k = sender_func(x, xmin, xmax, tmin, tmax);
+		return t > k;
 	}
 }
 
@@ -270,4 +271,4 @@ function sender_func(x, xmin, xmax, tmin, tmax) {
 	return (-k * Math.sqrt(x - xmin)) + tmax;
 }
 
-setInterval(sched, 5);
+setInterval(sched, 5000);
