@@ -28,6 +28,7 @@ var hunt_states = {};
 const funcmap = {
 	'succ': do_succ,
 	'cutt': do_cutt,
+	'%decoy': send_decoy
 	'%suckers': show_suckers,
 	'%succers': show_suckers,
 	'%cutters': show_cutters,
@@ -108,6 +109,10 @@ function handle_action(nick, chan, action) {
 					);
 			});
 		});
+}
+
+function send_decoy(nick, chan) {
+	client.say(chan, gen_dick());
 }
 
 function show_suckers(nick, chan) {
