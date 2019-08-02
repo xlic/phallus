@@ -28,10 +28,10 @@ var hunt_states = {};
 const funcmap = {
 	'succ': do_succ,
 	'cutt': do_cutt,
-	'suckers': show_suckers,
-	'succers': show_suckers,
-	'cutters': show_cutters,
-	'dicks': show_dicks
+	'%suckers': show_suckers,
+	'%succers': show_suckers,
+	'%cutters': show_cutters,
+	'%dicks': show_dicks
 };
 
 client.addListener('message', handle_message);
@@ -54,8 +54,8 @@ client.addListener('join', function(chan, who, msg) {
 
 function handle_message(from, chan, msg) {
 	hunt_states[chan].score++;
-	if (funcmap[msg]) {
-		funcmap[msg](from, chan);
+	if (funcmap[msg.split(' ')[0]]) {
+		funcmap[msg](from, chan, msg);
 	}
 }
 
@@ -144,7 +144,11 @@ function show_top(chan, action) {
 		});
 }
 
-function show_dicks(nick, chan) {
+function show_dicks(sender, chan, msg) {
+	var nick = msg.split(' ')[1];
+	if (!nick)
+		nick = sender;
+
 	db.get(`SELECT succ, cutt,
 		(SELECT AVG(time) FROM hunter_times WHERE nick = ? AND chan = ?) as average
 		FROM hunters where nick = ? and chan = ?`, nick, chan, nick, chan,
@@ -156,7 +160,7 @@ function show_dicks(nick, chan) {
 					' dicks and cut ' + row.cutt + ' dicks with an average of ' +
 					row.average + ' seconds per dick in ' + chan + '.');
 			else
-				client.say(chan, nick + ', you haven\'t participated in the dickhunt.');
+				client.say(chan, nick + ' hasn\'t participated in the dickhunt.');
 		});
 }
 
