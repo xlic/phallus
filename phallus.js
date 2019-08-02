@@ -54,8 +54,9 @@ client.addListener('join', function(chan, who, msg) {
 
 function handle_message(from, chan, msg) {
 	hunt_states[chan].score++;
-	if (funcmap[msg.split(' ')[0]]) {
-		funcmap[msg](from, chan, msg);
+	let first_word = msg.split(' ')[0];
+	if (funcmap[first_word]) {
+		funcmap[first_word](from, chan, msg);
 	}
 }
 
