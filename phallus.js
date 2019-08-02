@@ -254,9 +254,9 @@ function sender_ready(state) {
 	const x = state.score;
 	const t = Date.now()/1000 - state.last_kill_epoch;
 	const xmin = 25;
-	const xmax = 150;
-	const tmin = 1200;
-	const tmax = 10800;
+	const xmax = 125;
+	const tmin = 1200; // min 20 minutes
+	const tmax = 10800; // max 3 hours
 
 	if (x < xmin || t < tmin) {
 		return false;
