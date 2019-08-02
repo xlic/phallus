@@ -254,21 +254,15 @@ function sender_ready(state) {
 	const x = state.score;
 	const t = Date.now()/1000 - state.last_kill_epoch;
 	const xmin = 25;
-	const xmax = 125;
 	const tmin = 1200; // min 20 minutes
 	const tmax = 10800; // max 3 hours
 
-	if (x < xmin || t < tmin) {
-		return false;
-	} else {
-		let k = sender_func(x, xmin, xmax, tmin, tmax);
-		return t > k;
-	}
+	let k = sender_func(x, xmin, tmin, tmax);
+	return t > k;
 }
 
-function sender_func(x, xmin, xmax, tmin, tmax) {
-	const k = xmax / Math.sqrt(xmax - xmin);
-	return ((-k) * x) + tmax;
+function sender_func(x, xmin, tmin, tmax) {
+	return tmax*Math.acos((1/xmin)*(x/2 - 2*xmin)) - tmin;
 }
 
 setInterval(sched, 5000);
