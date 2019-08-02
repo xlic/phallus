@@ -252,7 +252,7 @@ function sender_initial_score() {
 
 function sender_ready(state) {
 	const x = state.score;
-	const t = state.last_kill_epoch - Date.now()/1000;
+	const t = Date.now()/1000 - state.last_kill_epoch;
 	const xmin = 25;
 	const xmax = 150;
 	const tmin = 1200;
