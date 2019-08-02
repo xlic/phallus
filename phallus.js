@@ -28,7 +28,7 @@ var hunt_states = {};
 const funcmap = {
 	'succ': do_succ,
 	'cutt': do_cutt,
-	'%decoy': send_decoy
+	'%decoy': send_decoy,
 	'%suckers': show_suckers,
 	'%succers': show_suckers,
 	'%cutters': show_cutters,
