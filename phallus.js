@@ -46,7 +46,7 @@ client.addListener('join', function(chan, who, msg) {
 		hunt_states[chan] = {
 			dick_sent: false,
 			score: sender_initial_score(),
-			last_kill_epoch: 0,
+			last_kill_epoch: Date.now()/1000,
 			sent_epoch: 0
 		};
 	}
@@ -75,6 +75,7 @@ function handle_action(nick, chan, action) {
 	}
 
 	hunt_states[chan].dick_sent = false;
+	hunt_states[chan].last_kill_epoch = Date.now()/1000;
 	const time = Date.now()/1000 - hunt_states[chan].sent_epoch;
 
 	db.get('SELECT COUNT(*) as count FROM hunters WHERE nick = ? AND chan = ?', nick, chan,
