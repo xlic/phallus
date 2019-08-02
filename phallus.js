@@ -268,7 +268,7 @@ function sender_ready(state) {
 
 function sender_func(x, xmin, xmax, tmin, tmax) {
 	const k = xmax / Math.sqrt(xmax - xmin);
-	return (-k * x) + tmax;
+	return ((-k) * x) + tmax;
 }
 
 setInterval(sched, 5000);
