@@ -104,8 +104,8 @@ function handle_action(nick, chan, action) {
 				else
 					client.say(chan,
 						'You cut that dick in ' + time +
-						'seconds. You\'ve cut ' + row.cutt +
-						'dicks in ' + chan + '.'
+						' seconds. You\'ve cut ' + row.cutt +
+						' dicks in ' + chan + '.'
 					);
 			});
 		});
