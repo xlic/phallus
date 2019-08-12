@@ -263,7 +263,7 @@ function sender_ready(state) {
 	const tmax = 10800; // max 3 hours
 
 	let k = sender_func(x, xmin, tmin, tmax);
-	return t > k;
+	return t > k || (isNaN(k) && x > 100) || t > tmax;
 }
 
 function sender_func(x, xmin, tmin, tmax) {
